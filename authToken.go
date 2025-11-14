@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 
@@ -51,8 +51,8 @@ func GetTokens(c AuthorizationConfig) (t Tokens, err error) {
 	if err != nil {
 		return t, errors.Wrap(err, "error while trying to get tokens")
 	}
-
-	body, err := ioutil.ReadAll(response.Body)
+	
+	body, err := io.ReadAll(response.Body)
 
 	if debugmode == "true" {
 		fmt.Println("Response-Body: ", body)
